@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { TextInput, Button, Text, IconButton } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../store/userSlice"; // Import your action to set user data
+import { setUserData } from "../store/userSlice";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Optional, if using AsyncStorage for persistence
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

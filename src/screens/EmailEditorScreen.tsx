@@ -41,23 +41,29 @@ const EmailEditorScreen = () => {
         dispatch(addDraft(newDraft));
       }
       alert('Email sent successfully!');
-      navigation.goBack();
+      navigation.navigate("Home");
     } catch (error) {
       alert('Failed to send email. Please try again.');
     }
   };
   
   const handleSaveAsDraft = () => {
-    const newDraft = {
-      id: uuid.v4().toString(),
+    const draftData = {
+      id: draftId || uuid.v4().toString(),
       recipient,
       subject,
       body,
       sent: false
     };
-
-    dispatch(addDraft(newDraft));
-    navigation.goBack(); // Optional: return to previous screen
+  
+    if (draftId) {
+      // Update existing draft
+      dispatch(updateDraft(draftData));
+    } else {
+      // Add new draft
+      dispatch(addDraft(draftData));
+    }
+    navigation.navigate("Home");
   };
   return (
     <View style={{ flex: 1, padding: 16 }}>

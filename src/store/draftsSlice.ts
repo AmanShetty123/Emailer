@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
 import { loadDrafts, saveDrafts } from '../storage/draftsStorage'
 import { RootState, AppDispatch } from './store'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export interface Draft {
   id: string
   recipient: string
@@ -50,4 +51,8 @@ export const fetchDrafts = () => async (dispatch: AppDispatch) => {
   const drafts = await loadDrafts()
   dispatch(setDrafts(drafts))
 }
+export const clearAllDrafts = () => async (dispatch: AppDispatch) => {
+  await AsyncStorage.removeItem('drafts');
+  dispatch(setDrafts([]));
+};
 export default draftsSlice.reducer

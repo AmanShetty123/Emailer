@@ -1,4 +1,3 @@
-// src/components/DraftItem.tsx
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Text, Card } from "react-native-paper";
