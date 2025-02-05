@@ -6,6 +6,7 @@ import { addDraft, updateDraft, markAsSent } from "../store/draftsSlice";
 import { saveDrafts } from "../storage/draftsStorage";
 import { useNavigation, RouteProp, useRoute } from "@react-navigation/native";
 import { sendEmail } from "../services/emailService";
+import uuid from 'react-native-uuid';
 
 const EmailEditorScreen = () => {
   const navigation = useNavigation();
@@ -46,6 +47,18 @@ const EmailEditorScreen = () => {
     }
   };
   
+  const handleSaveAsDraft = () => {
+    const newDraft = {
+      id: uuid.v4().toString(),
+      recipient,
+      subject,
+      body,
+      sent: false
+    };
+
+    dispatch(addDraft(newDraft));
+    navigation.goBack(); // Optional: return to previous screen
+  };
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <TextInput
@@ -77,10 +90,21 @@ const EmailEditorScreen = () => {
       <Button
         mode="contained"
         onPress={handleSendEmail}
-        buttonColor="#C2E7FF"
-        textColor="black"
+        buttonColor="#25D366"
+        textColor="white"
       >
-       {isEditing ? "Update Draft" : "Send Email"}
+        Send Email
+      </Button>
+      <Button
+        mode="contained"
+        onPress={handleSaveAsDraft}
+        buttonColor="#FF0033"
+        textColor="white"
+        style={{
+          marginTop: 10
+        }}
+      >
+        Save Draft
       </Button>
     </View>
   );
