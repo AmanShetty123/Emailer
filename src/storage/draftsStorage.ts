@@ -15,7 +15,7 @@ export const saveDrafts = async (drafts: Draft[]) => {
 export const loadDrafts = async (): Promise<Draft[]> => {
   try {
     const jsonValue = await AsyncStorage.getItem(STORAGE_KEY)
-    return jsonValue ? JSON.parse(jsonValue) : []
+    return jsonValue ? JSON.parse(jsonValue) as Draft[] : []
   } catch (e) {
     console.error('Failed to load drafts', e)
     return []

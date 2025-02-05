@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import { PaperProvider } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "./src/store/store";
@@ -6,7 +6,9 @@ import AppNavigator from "./src/navigation/AppNavigator";
 export default function App() {
   return (
     <Provider store={store}>
-      <AppNavigator />
+      <PaperProvider>
+        <AppNavigator />
+      </PaperProvider>
     </Provider>
   );
 }
