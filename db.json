@@ -1,0 +1,53 @@
+{
+  "drafts": [
+    {
+      "id": "1",
+      "recipient": "john@example.com",
+      "subject": "Meeting Recap",
+      "body": "Here's a summary of our recent discussion...",
+      "sent": false
+    },
+    {
+      "id": "d78dc8bf-43ed-4942-9a74-e49ef53eb87f",
+      "recipient": "test@gmail.com",
+      "subject": "Test Email",
+      "body": "Draft body",
+      "sent": true
+    },
+    {
+      "id": "8507acbb-3c8e-4e65-b67c-0fb2e6c0fd98",
+      "recipient": "test1@gmail.com",
+      "subject": "Test est ",
+      "body": "Body",
+      "sent": true
+    },
+    {
+      "id": "a1337fd4-bb46-406c-920b-e7c221dfa7e1",
+      "recipient": "test1@gmail.com",
+      "subject": "Test Mail",
+      "body": "Sending ...",
+      "sent": true
+    },
+    {
+      "id": "1db11a9c-f52f-4411-8a35-ed1c90bb9c0e",
+      "recipient": "Uyggh",
+      "subject": "Ccvbb",
+      "body": "Gghgh",
+      "sent": true
+    },
+    {
+      "id": "cbbe9fcc-894f-4038-94d9-3355d694d7b6",
+      "recipient": "",
+      "subject": "",
+      "body": "",
+      "sent": true
+    },
+    {
+      "id": "bd5ed4a0-7c06-4409-98d7-1ad7ab9722a6",
+      "recipient": "",
+      "subject": "",
+      "body": "",
+      "sent": true
+    }
+  ]
+}

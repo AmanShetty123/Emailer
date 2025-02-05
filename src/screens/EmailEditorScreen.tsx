@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { addDraft, updateDraft, markAsSent } from "../store/draftsSlice";
+import { addDraft, updateDraft, markAsSent, addDrafts, updateDrafts, sendDraft, sentEmail } from "../store/draftsSlice";
 import { saveDrafts } from "../storage/draftsStorage";
 import { useNavigation, RouteProp, useRoute } from "@react-navigation/native";
 import { sendEmail } from "../services/emailService";
@@ -21,30 +21,24 @@ const EmailEditorScreen = () => {
   const isEditing = draft != null;
   const draftId = draft?.id
   const handleSendEmail = async () => {
-    if (!recipient.trim() || !subject.trim() || !body.trim()) {
-      alert('Please fill all fields before sending.');
-      return;
+    const draftData = {
+      id: draftId || uuid.v4().toString(),
+      recipient,
+      subject,
+      body,
+      sent: true
+    };
+   
+    if (draftId) {
+      // Update existing draft to sent status
+      dispatch(sendDraft(recipient, subject, body, draftId) as any);
+    } else {
+      // Add new sent draft
+      dispatch(sentEmail(recipient, subject, body, draftId) as any);
     }
-  
-    try {
-      await sendEmail(recipient, subject, body);
-      if (isEditing && draftId) {
-        dispatch(markAsSent(draftId));
-      } else {
-        const newDraft = {
-          id: new Date().toISOString(), // generate a new ID
-          recipient,
-          subject,
-          body,
-          sent: true,
-        };
-        dispatch(addDraft(newDraft));
-      }
-      alert('Email sent successfully!');
-      navigation.navigate("Home");
-    } catch (error) {
-      alert('Failed to send email. Please try again.');
-    }
+    
+    // Add your email sending logic here
+    navigation.navigate("Home");
   };
   
   const handleSaveAsDraft = () => {
@@ -55,13 +49,13 @@ const EmailEditorScreen = () => {
       body,
       sent: false
     };
-  
+   
     if (draftId) {
       // Update existing draft
-      dispatch(updateDraft(draftData));
+      dispatch(updateDrafts(draftId, recipient, subject, body) as any);
     } else {
       // Add new draft
-      dispatch(addDraft(draftData));
+      dispatch(addDrafts(recipient, subject, body) as any);
     }
     navigation.navigate("Home");
   };
