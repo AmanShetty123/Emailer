@@ -20,6 +20,13 @@
       "subject": "Search Bar ",
       "body": "This is a search bar ",
       "sent": true
+    },
+    {
+      "id": "606fd52f-fefc-404b-80cb-d4b05bd9809e",
+      "recipient": "test@test.com",
+      "subject": "TEST EMAIL",
+      "body": "Email sending ",
+      "sent": true
     }
   ]
 }
