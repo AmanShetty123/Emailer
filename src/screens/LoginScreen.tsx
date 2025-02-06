@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // To show error messages if login fails
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -34,7 +34,6 @@ const LoginScreen = () => {
     }
   };
 
-  // Simulated login API call
   const fakeLoginAPI = (email: string, password: string) => {
     return new Promise<{ success: boolean; user: any }>((resolve) => {
       setTimeout(() => {
@@ -52,15 +51,10 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Icon */}
       <View style={styles.iconContainer}>
         <IconButton icon="email-outline" size={100} color="#C2E7FF" />
       </View>
-
-      {/* Error message */}
       {error ? <Text style={styles.error}>{error}</Text> : null}
-
-      {/* Input fields */}
       <TextInput
         label="Email"
         value={email}
@@ -77,8 +71,6 @@ const LoginScreen = () => {
         secureTextEntry
         mode="outlined"
       />
-
-      {/* Login button */}
       <Button mode="contained" onPress={handleLogin} style={styles.button} buttonColor="#C2E7FF" textColor="black" labelStyle={{
         fontSize: 18
       }}>
@@ -97,7 +89,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     alignItems: "center",
-    marginBottom: 40, // Give space to the icon
+    marginBottom: 40,
   },
   input: {
     marginBottom: 15,

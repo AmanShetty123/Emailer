@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
-import { loadDrafts, saveDrafts } from '../storage/draftsStorage'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { saveDrafts } from '../storage/draftsStorage'
 import { RootState, AppDispatch } from './store'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DraftService } from '../services/draftService';
@@ -57,11 +57,7 @@ export const addDrafts = (recipient: string, subject: string, body: string) => a
       body,
       sent: false
     };
-
-    // Add to mock API
     const addedDraft = await DraftService.addDraft(newDraft);
-    
-    // Dispatch to Redux store
     dispatch(draftsSlice.actions.addDraft(addedDraft));
   } catch (error) {
     console.error('Failed to add draft', error);
@@ -76,11 +72,7 @@ export const updateDrafts = (id: string ,recipient: string, subject: string, bod
       body,
       sent: false
     };
-
-    // Add to mock API
     const addedDraft = await DraftService.updateDraft(updatedDraft);
-    
-    // Dispatch to Redux store
     dispatch(draftsSlice.actions.updateDraft(updatedDraft));
   } catch (error) {
     console.error('Failed to add draft', error);

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { addDraft, updateDraft, markAsSent, addDrafts, updateDrafts, sendDraft, sentEmail } from "../store/draftsSlice";
-import { saveDrafts } from "../storage/draftsStorage";
+import { addDrafts, updateDrafts, sendDraft, sentEmail } from "../store/draftsSlice";
 import { useNavigation, RouteProp, useRoute } from "@react-navigation/native";
-import { sendEmail } from "../services/emailService";
 import uuid from 'react-native-uuid';
 
 const EmailEditorScreen = () => {
@@ -36,8 +34,6 @@ const EmailEditorScreen = () => {
       // Add new sent draft
       dispatch(sentEmail(recipient, subject, body, draftId) as any);
     }
-    
-    // Add your email sending logic here
     navigation.navigate("Home");
   };
   
