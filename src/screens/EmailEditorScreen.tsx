@@ -4,6 +4,7 @@ import { Button, TextInput, HelperText } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { addDrafts, updateDrafts, sendDraft, sentEmail } from "../store/draftsSlice";
 import { useNavigation, RouteProp, useRoute } from "@react-navigation/native";
+import Toast from 'react-native-toast-message';
 import uuid from 'react-native-uuid';
 
 interface FormErrors {
@@ -42,21 +43,17 @@ const EmailEditorScreen = () => {
       body: ""
     };
 
-    // Recipient validation
     if (!recipient) {
       newErrors.recipient = "Email address is required";
     } else if (!validateEmail(recipient)) {
       newErrors.recipient = "Please enter a valid email address";
     }
 
-    // Only validate subject and body if not saving as draft
     if (!isDraft) {
-      // Subject validation
       if (!subject.trim()) {
         newErrors.subject = "Subject is required";
       }
 
-      // Body validation
       if (!body.trim()) {
         newErrors.body = "Message body is required";
       }
@@ -89,46 +86,58 @@ const EmailEditorScreen = () => {
     }
   };
 
+  const showToast = (type: 'success' | 'error', message: string) => {
+    Toast.show({
+      type: type,
+      text1: type === 'success' ? 'Success' : 'Error',
+      text2: message,
+      position: 'top',
+      visibilityTime: 3000,
+      autoHide: true,
+      topOffset: 40,
+      bottomOffset: 40,
+    });
+  };
+
   const handleSendEmail = async () => {
     if (!validateForm()) {
       return;
     }
 
-    const draftData = {
-      id: draftId || uuid.v4().toString(),
-      recipient,
-      subject,
-      body,
-      sent: true
-    };
-   
-    if (draftId) {
-      dispatch(sendDraft(recipient, subject, body, draftId) as any);
-    } else {
-      dispatch(sentEmail(recipient, subject, body, draftId) as any);
+    try {
+      if (draftId) {
+        await dispatch(sendDraft(recipient, subject, body, draftId) as any);
+      } else {
+        await dispatch(sentEmail(recipient, subject, body, draftId) as any);
+      }
+      showToast('success', 'Email sent successfully!');
+      setTimeout(() => {
+        navigation.navigate("Home");
+      }, 1000);
+    } catch (error) {
+      showToast('error', 'Failed to send email. Please try again.');
     }
-    navigation.navigate("Home");
   };
  
   const handleSaveAsDraft = () => {
     if (!validateForm(true)) {
       return;
     }
-
-    const draftData = {
-      id: draftId || uuid.v4().toString(),
-      recipient,
-      subject,
-      body,
-      sent: false
-    };
    
-    if (draftId) {
-      dispatch(updateDrafts(draftId, recipient, subject, body) as any);
-    } else {
-      dispatch(addDrafts(recipient, subject, body) as any);
+    try {
+      if (draftId) {
+        dispatch(updateDrafts(draftId, recipient, subject, body) as any);
+        showToast('success', 'Draft updated successfully!');
+      } else {
+        dispatch(addDrafts(recipient, subject, body) as any);
+        showToast('success', 'Draft saved successfully!');
+      }
+      setTimeout(() => {
+        navigation.navigate("Home");
+      }, 1000);
+    } catch (error) {
+      showToast('error', 'Failed to save draft. Please try again.');
     }
-    navigation.navigate("Home");
   };
 
   return (

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Draft } from "../store/draftsSlice";
 
-const BASE_URL = "http://your_local_api_address/drafts";
+const BASE_URL = "http://192.168.1.5:3004/drafts";
 
 export const DraftService = {
   async fetchDrafts() {

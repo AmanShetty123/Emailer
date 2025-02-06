@@ -27,6 +27,13 @@
       "subject": "TEST EMAIL",
       "body": "Email sending ",
       "sent": true
+    },
+    {
+      "id": "c57d00fd-6cd7-4bb8-8958-06ddee2644da",
+      "recipient": "test@test.com",
+      "subject": "Toast Message ",
+      "body": "Draft Toast ",
+      "sent": true
     }
   ]
 }
