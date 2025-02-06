@@ -109,7 +109,7 @@ Also, TypeScript was totally new to me as I have previously worked with only Jav
 npm install json-server
 ```
 
-Replace the base URL with your device's local IP address.
+Replace the base URL with your device's local IP address in the draftService.ts file
 
 ## Contact
 
