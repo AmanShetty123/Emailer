@@ -69,7 +69,6 @@ npx expo start
 yarn expo start
 ```
 
-
 ## Key Features Implementation
 
 ### Email Validation
@@ -95,6 +94,23 @@ The app uses Redux for state management with the following slices:
 ### Data Persistence
 - AsyncStorage for local data storage
 
+## Challenges Faced
+
+Challenges that I faced were setting up and configuring the Redux Toolkit as it was my first time working with this package.
+Also, TypeScript was totally new to me as I have previously worked with only JavaScript for app development.
+
+## Bonus Features Implemented
+
+- Search bar for filtering the emails or the drafts saved.
+
+## Setting Up the JSON Server
+
+```bash
+npm install json-server
+```
+
+Replace the base URL with your device's local IP address.
+
 ## Contact
 
 Email - shettyamman016@gmail.com
@@ -105,3 +121,4 @@ Project Link: https://github.com/AmanShetty123/Emailer
 - React Native Paper for UI components
 - React Navigation for routing
 - Redux Toolkit for state management
+
